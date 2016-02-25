@@ -1,0 +1,26 @@
+elasticsearch:
+  image: charllie/elasticsearch:latest
+  restart: always
+  net: "host"
+  container_name: elasticsearch
+  volumes:
+  - some-elasticsearch-data-folder:/opt/elasticsearch/data
+  - some-elasticsearch-config-folder:/opt/elasticsearch/config
+
+kibana:
+  image: objectrocket/kibana:latest
+  restart: always
+  net: "host"
+  container_name: kibana
+  environment:
+  - ELASTICSEARCH_URL=http://localhost:9200
+
+logstash-ui:
+  image: charllie/logstash-ui:latest
+  restart: always
+  net: "host"
+  container_name: logstash-ui
+  volumes:
+  - some-logstash-data-folder:/data
+  - some-logstash-config-folder:/config
+  - some-logstash-ui-config.json:/root/server/config.json
